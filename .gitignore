@@ -1,2 +1,4 @@
 Instruction.pdf
 Extra.txt
+*.o
+*.out
