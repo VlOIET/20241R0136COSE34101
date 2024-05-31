@@ -1,6 +1,6 @@
 CC = gcc
 TARGET = a.out
-OBJS = a.o b.o c1.o c2.o c3.o c4.o c5.o c6.o
+OBJS = a.o b.o c1.o c2.o c3.o c4.o c5.o c6.o d.o
 
 $(TARGET): $(OBJS)
 	$(CC) -o $@ $(OBJS)
@@ -28,6 +28,9 @@ c5.o : Preemptive_SJF.c
 
 c6.o : Preemptive_Priority.c
 	$(CC) -c -o c6.o Preemptive_Priority.c
+
+d.o : Queue.c
+	$(CC) -c -o d.o Queue.c
 
 clean :
 	rm -f *.o

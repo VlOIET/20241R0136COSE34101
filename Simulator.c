@@ -22,15 +22,29 @@ int main(int argc, char *argv[])
 
     for (int i = 0; i < process_quantity; i++)
     {
-        Process *new_process = Create_Process(i);
+        Process *new_process = create_process(i);
         process_list[i] = new_process;
     }
+
+    Queue *ready_queue = make_queue();
 
     for (int i = 0; i < process_quantity; i++)
     {
         Process *now_process = *(process_list + i);
-        printf("%d %d %d %d %d\n", now_process->Process_id, now_process->CPU_burst, now_process->IO_burst, now_process->Priority, now_process->Arrival_time);
+        enqueue(ready_queue, now_process);
     }
+
+    while (1)
+    {
+        Process *del_process = dequeue(ready_queue);
+
+        if(del_process == NULL)
+            break;
+
+        printf("%d %d %d %d %d\n", del_process->process_id, del_process->CPU_burst, del_process->IO_burst, del_process->priority, del_process->arrival_time);
+    }
+
+    remove_queue(ready_queue);
 
     for (int i = 0; i < process_quantity; i++)
     {
