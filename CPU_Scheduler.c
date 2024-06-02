@@ -39,3 +39,147 @@ void Evaluation(Simul **simul_list, int process_quantity)
     printf("Average waiting time : %.2lf\n", (double)total_waiting_time / process_quantity);
     printf("Average turnaround time : %.2lf\n", (double)total_turnaround_time / process_quantity);
 }
+
+void display_Gantt(int *record, int time) // Process가 10개 이하, time이 100이하 이어야 한다.
+{
+    printf("\nGantt Chart\n");
+
+    int before = 0;
+    int now = 0;
+
+    // 0번째 줄
+    before = 0;
+    now = 0;
+    for (int i = 0; i < time; i++)
+    {
+        if (i != 0)
+            before = now;
+
+        now = record[i];
+
+        if (before == now)
+        {
+            if (i == 0)
+                printf("0");
+            else
+                printf("  ");
+        }
+        else
+            printf("   ");
+    }
+    printf("%d", time);
+    printf("\n");
+
+    // 1번째 줄
+    before = 0;
+    now = 0;
+    for (int i = 0; i < time; i++)
+    {
+        if (i != 0)
+            before = now;
+
+        now = record[i];
+
+        if (before == now)
+            printf("--");
+        else
+            printf("---");
+    }
+    printf("-");
+    printf("\n");
+
+    // 2번째 줄
+    before = 0;
+    now = 0;
+    for (int i = 0; i < time; i++)
+    {
+        if (i != 0)
+            before = now;
+
+        now = record[i];
+
+        if (before == now)
+        {
+            if (i == 0)
+                printf("| ");
+            else
+                printf("  ");
+        }
+        else
+            printf("|%d ", now - 1);
+    }
+    printf("|");
+    printf("\n");
+
+    // 세번째 줄
+    before = 0;
+    now = 0;
+    for (int i = 0; i < time; i++)
+    {
+        if (i != 0)
+            before = now;
+
+        now = record[i];
+
+        if (before == now)
+            printf("--");
+        else
+            printf("---");
+    }
+    printf("-");
+    printf("\n");
+
+    // 네번째 줄
+    before = 0;
+    now = 0;
+    for (int i = 0; i < time; i++)
+    {
+        if (i != 0)
+            before = now;
+
+        now = record[i];
+
+        if (before == now)
+            printf("  ");
+        else
+            printf("^  ");
+    }
+    printf(" ");
+    printf("\n");
+
+    // 다섯번째 줄
+    before = 0;
+    now = 0;
+    for (int i = 0; i < time; i++)
+    {
+        if (i != 0)
+            before = now;
+
+        now = record[i];
+
+        if (before == now)
+            printf("  ");
+        else
+            printf("|  ");
+    }
+    printf(" ");
+    printf("\n");
+
+    // 여섯번째 줄
+    before = 0;
+    now = 0;
+    for (int i = 0; i < time; i++)
+    {
+        if (i != 0)
+            before = now;
+
+        now = record[i];
+
+        if (before == now)
+            printf("  ");
+        else
+            printf("%02d ", i);
+    }
+    printf(" ");
+    printf("\n");
+}

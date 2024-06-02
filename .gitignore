@@ -1,6 +1,7 @@
 Instruction.pdf
 Extra.txt
 gpt.txt
+test.txt
 *.o
 *.out
 .vscode

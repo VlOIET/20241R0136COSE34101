@@ -18,6 +18,10 @@ void SJF(Process **process_list, int process_quantity)
     Simul *In_CPU = NULL;
     Node *traverse_ptr;
 
+    int record_size = 10;
+    int *record = (int *)malloc(sizeof(int) * record_size);
+    memset(record, '\0', sizeof(int) * 10);
+
     while (process_end < process_quantity)
     {
         sleep(1);
@@ -80,12 +84,22 @@ void SJF(Process **process_list, int process_quantity)
                 printf("[Time: %d] Process [%d] is executed by CPU\n", time, In_CPU->process->process_id);
         }
 
+        if (time == record_size)
+        {
+            record_size += 10;
+            record = (int *)realloc(record, sizeof(int) * record_size);
+            memset(record + time + 1, '\0', sizeof(int) * 10);
+        }
+
+        if (In_CPU != NULL)
+            record[time] = In_CPU->process->process_id + 1;
+
         time++;
     }
     Evaluation(simul_list, process_quantity);
+    display_Gantt(record, time - 1);
 
     printf("-------------------------------SJF Scheduling END------------------------------\n");
-
 
     for (int i = 0; i < process_quantity; i++)
     {

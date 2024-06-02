@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
+#include <string.h>
 
 typedef struct
 {
@@ -58,4 +59,5 @@ void Preemptive_Priority(Process **process_list, int process_quantity);
 
 // Config 함수 구현
 // Evaluation 함수 구현
-void Evaluation(Simul** simul_list, int process_quantity);
+void Evaluation(Simul **simul_list, int process_quantity);
+void display_Gantt(int *record, int time);

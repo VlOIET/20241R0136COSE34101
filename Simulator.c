@@ -57,6 +57,7 @@ int main(int argc, char *argv[])
 
     case 4:
         int time_quantum = 0;
+        printf("Input Time_quantum: ");
         scanf("%d", &time_quantum);
         RR(process_list, process_quantity, time_quantum);
         break;
