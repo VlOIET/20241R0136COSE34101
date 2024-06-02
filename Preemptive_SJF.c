@@ -58,7 +58,7 @@ void Preemptive_SJF(Process **process_list, int process_quantity)
         }
 
         traverse_ptr = ready_queue->start;
-        
+
         // Preemptive 구현
         Node *new_shortest_job = ready_queue->start;
         traverse_ptr = ready_queue->start;
@@ -74,12 +74,17 @@ void Preemptive_SJF(Process **process_list, int process_quantity)
                 In_CPU = delete (ready_queue, traverse_ptr);
                 traverse_ptr = temp;
                 change_signal = 1;
-            }
-            
-            if (traverse_ptr == ready_queue->end)
-                break;
 
-            traverse_ptr = traverse_ptr->next;
+                if (temp == NULL)
+                    break;
+            }
+            else
+            {
+                if (traverse_ptr == ready_queue->end)
+                    break;
+
+                traverse_ptr = traverse_ptr->next;
+            }
         }
 
         if (change_signal)

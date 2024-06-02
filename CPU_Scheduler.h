@@ -52,6 +52,7 @@ void SJF(Process **process_list, int process_quantity);
 void Priority(Process **process_list, int process_quantity);
 void RR(Process **process_list, int process_quantity, int time_quantum);
 void Preemptive_SJF(Process **process_list, int process_quantity);
+void Preemptive_Priority(Process **process_list, int process_quantity);
 
 // Config 함수 구현
 // Evaluation 함수 구현
