@@ -1,6 +1,8 @@
 // 우선 싱글코어로 구현
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
+#include <unistd.h>
 
 typedef struct
 {
@@ -11,9 +13,16 @@ typedef struct
     int priority;
 } Process;
 
-typedef struct Node
+typedef struct
 {
     Process *process;
+    int end_time;
+    int waiting_time;
+} Simul;
+
+typedef struct Node
+{
+    Simul *simul;
     struct Node *next;
 } Node;
 
@@ -24,18 +33,22 @@ typedef struct Queue
 } Queue;
 
 // Create_Process 함수 구현 -> 프로세스 생성
-// Config 함수 구현
-// Evaluation 함수 구현
+Process *create_process(int pid);
+
+// Ready / Waiting Queue를 위한 Queue
+Queue *make_queue();
+void insert(Queue *queue_ptr, Simul *simul_ptr);
+Simul *delete(Queue *queue_ptr, Node *target_ptr);
+void remove_queue(Queue *queue_ptr);
+
+Simul *create_simul();
 
 // Scheduling Algortihm들 구현
 // Preemptive는 다른 프로세스를 확인하는 기점을 변경함으로써 구현
 // Alogrithm 실행할 때 레디 큐만 넣어서 가능할까?
 // 안될 듯 알고리즘 함수 내에서 시간 돌리면서, 모든 상황을 저장해 두어야 Gantt Chart 구현가능할 것 같은데
+void FCFS(Process **process_list, int process_quantity);
 
-Process *create_process(int pid);
-
-//Ready / Waiting Queue를 위한 Queue
-Queue *make_queue();
-void enqueue(Queue* queue_ptr, Process* process_ptr);
-Process *dequeue(Queue* queue_ptr);
-void remove_queue(Queue* queue_ptr);
+// Config 함수 구현
+// Evaluation 함수 구현
+void Evaluation(Simul** simul_list, int process_quantity);

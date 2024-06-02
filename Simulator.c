@@ -24,27 +24,10 @@ int main(int argc, char *argv[])
     {
         Process *new_process = create_process(i);
         process_list[i] = new_process;
+        printf("%d %d %d %d %d\n", new_process->process_id, new_process->CPU_burst, new_process->IO_burst, new_process->arrival_time, new_process->priority);
     }
 
-    Queue *ready_queue = make_queue();
-
-    for (int i = 0; i < process_quantity; i++)
-    {
-        Process *now_process = *(process_list + i);
-        enqueue(ready_queue, now_process);
-    }
-
-    while (1)
-    {
-        Process *del_process = dequeue(ready_queue);
-
-        if(del_process == NULL)
-            break;
-
-        printf("%d %d %d %d %d\n", del_process->process_id, del_process->CPU_burst, del_process->IO_burst, del_process->priority, del_process->arrival_time);
-    }
-
-    remove_queue(ready_queue);
+    FCFS(process_list, process_quantity);
 
     for (int i = 0; i < process_quantity; i++)
     {

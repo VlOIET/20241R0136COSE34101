@@ -4,18 +4,18 @@ Queue *make_queue()
 {
     Queue *queue_ptr = malloc(sizeof(Queue));
     queue_ptr->start = NULL;
-    queue_ptr->end = NULL; 
+    queue_ptr->end = NULL;
 
     return queue_ptr;
 }
 
-void enqueue(Queue* queue_ptr, Process* process_ptr)
+void insert(Queue *queue_ptr, Simul *simul_ptr)
 {
     Node *new_node = malloc(sizeof(Node));
-    new_node->process = process_ptr;
+    new_node->simul = simul_ptr;
     new_node->next = NULL;
 
-    if(queue_ptr->start == NULL)
+    if (queue_ptr->start == NULL)
         queue_ptr->start = new_node;
     else
         queue_ptr->end->next = new_node;
@@ -23,26 +23,44 @@ void enqueue(Queue* queue_ptr, Process* process_ptr)
     queue_ptr->end = new_node;
 }
 
-Process *dequeue(Queue* queue_ptr)
+Simul *delete(Queue *queue_ptr, Node *subject)
 {
-    Process* target_process;
+    Node *before_node = NULL;
+    Node *target_node = queue_ptr->start;
+    Simul *target_simul = NULL;
 
-    if(queue_ptr->start == NULL)
+    while (target_simul == NULL && target_node != NULL)
     {
-        return NULL;
-    }
-    else
-    {
-        Node* target_node = queue_ptr->start;
-        target_process = target_node->process;
+        if (target_node == subject)
+        {
+            if (before_node == NULL) // 삭제할 노드가 맨 앞에 있는 경우
+            {
+                queue_ptr->start = target_node->next;
+                target_simul = target_node->simul;
+                free(target_node);
+            }
+            else // 삭제할 노드가 중간 & 맨 뒤에 있는 경우
+            {
+                before_node->next = target_node->next;
 
-        queue_ptr->start = queue_ptr->start->next;
-        free(target_node);
+                if (before_node->next == NULL)
+                    queue_ptr->end = before_node;
+
+                target_simul = target_node->simul;
+                free(target_node);
+            }
+        }
+        else
+        {
+            before_node = target_node;
+            target_node = target_node->next;
+        }
+
+        return target_simul;
     }
-    return target_process;
 }
 
-void remove_queue(Queue* queue_ptr)
+void remove_queue(Queue *queue_ptr)
 {
     free(queue_ptr);
 }
