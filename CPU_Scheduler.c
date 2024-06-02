@@ -9,8 +9,8 @@ Process *create_process(int pid)
     new_process->process_id = pid;
     new_process->CPU_burst = rand() % 10 + 1; // 1 ~ 10 사이 랜덤
     new_process->IO_burst = rand() % 6;       // 0 ~ 5 사이 랜덤
-    new_process->arrival_time = rand() % 11;  // 0 ~ 10 사이 랜덤
-    new_process->priority = rand() % 10 + 1;  // 1 ~ 10 사이 랜덤
+    new_process->arrival_time = rand() % 7;  // 0 ~ 6 사이 랜덤
+    new_process->priority = rand() % 5 + 1;  // 1 ~ 5 사이 랜덤
 
     return new_process;
 }

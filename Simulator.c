@@ -28,7 +28,8 @@ int main(int argc, char *argv[])
     }
 
     //FCFS(process_list, process_quantity);
-    SJF(process_list, process_quantity);
+    //SJF(process_list, process_quantity);
+    Priority(process_list, process_quantity);
 
     for (int i = 0; i < process_quantity; i++)
     {
