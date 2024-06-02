@@ -7,9 +7,9 @@ Process *create_process(int pid)
     Process *new_process = (Process *)malloc(sizeof(Process));
 
     new_process->process_id = pid;
-    new_process->CPU_burst = rand() % 10 + 1; // 1 ~ 10 사이 랜덤
-    new_process->IO_burst = rand() % 6;       // 0 ~ 5 사이 랜덤
-    new_process->arrival_time = rand() % 7;  // 0 ~ 6 사이 랜덤
+    new_process->CPU_burst = rand() % 8 + 1; // 1 ~ 10 사이 랜덤
+    new_process->IO_burst = rand() % 5;       // 0 ~ 5 사이 랜덤
+    new_process->arrival_time = rand() % 4;  // 0 ~ 6 사이 랜덤
     new_process->priority = rand() % 5 + 1;  // 1 ~ 5 사이 랜덤
 
     return new_process;
