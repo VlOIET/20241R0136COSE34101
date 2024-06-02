@@ -17,6 +17,7 @@ typedef struct
 typedef struct
 {
     Process *process;
+    int first_cpu_time;
     int end_time;
     int waiting_time;
 } Simul;

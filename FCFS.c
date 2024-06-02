@@ -18,7 +18,7 @@ void FCFS(Process **process_list, int process_quantity)
     Simul *In_CPU = NULL;
     Node *traverse_ptr;
 
-    //실행 중인 프로세스 저장을 위한 배열 생성
+    // 실행 중인 프로세스 저장을 위한 배열 생성
     int record_size = 10;
     int *record = (int *)malloc(sizeof(int) * record_size);
     memset(record, '\0', sizeof(int) * 10);
@@ -68,17 +68,21 @@ void FCFS(Process **process_list, int process_quantity)
             In_CPU = delete (ready_queue, ready_queue->start);
 
             if (In_CPU != NULL) // ready_queue에 프로세스가 있는 경우
+            {
+                if (In_CPU->first_cpu_time == -1)
+                    In_CPU->first_cpu_time = time;
                 printf("[Time: %d] Process [%d] is executed by CPU\n", time, In_CPU->process->process_id);
+            }
         }
 
-        if (time == record_size) //배열의 크기가 부족하면 추가 할당
+        if (time == record_size) // 배열의 크기가 부족하면 추가 할당
         {
             record_size += 10;
             record = (int *)realloc(record, sizeof(int) * record_size);
-            memset(record + time + 1, '\0', sizeof(int) * 10);
+            memset(record + time, '\0', sizeof(int) * 10);
         }
 
-        if (In_CPU != NULL) //CPU에 할당된 프로세스가 있는 경우
+        if (In_CPU != NULL) // CPU에 할당된 프로세스가 있는 경우
             record[time] = In_CPU->process->process_id + 1;
 
         time++;
@@ -89,7 +93,7 @@ void FCFS(Process **process_list, int process_quantity)
 
     printf("------------------------------FCFS Scheduling END------------------------------\n");
 
-    //할당된 메모리들 모두 해제
+    // 할당된 메모리들 모두 해제
     for (int i = 0; i < process_quantity; i++)
     {
         free(simul_list[i]);

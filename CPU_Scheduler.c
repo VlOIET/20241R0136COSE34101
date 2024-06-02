@@ -18,6 +18,7 @@ Simul *create_simul(Process *process)
 {
     Simul *new_simul = (Simul *)malloc(sizeof(Simul));
     new_simul->process = process;
+    new_simul->first_cpu_time = -1;
     new_simul->end_time = 0;
     new_simul->waiting_time = 0;
 
@@ -28,15 +29,18 @@ void Evaluation(Simul **simul_list, int process_quantity)
 {
     int total_waiting_time = 0;
     int total_turnaround_time = 0;
+    int total_response_time = 0;
 
     for (int i = 0; i < process_quantity; i++)
     {
         total_waiting_time += simul_list[i]->waiting_time;
         total_turnaround_time += (simul_list[i]->end_time - simul_list[i]->process->arrival_time);
+        total_response_time += (simul_list[i]->first_cpu_time - simul_list[i]->process->arrival_time);
     }
 
     printf("Average waiting time : %.2lf\n", (double)total_waiting_time / process_quantity);
     printf("Average turnaround time : %.2lf\n", (double)total_turnaround_time / process_quantity);
+    printf("Average response time : %.2lf\n", (double)total_response_time / process_quantity);
 }
 
 void display_Gantt(int *record, int time) // Process가 10개 이하, time이 100이하 이어야 한다.

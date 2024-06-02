@@ -9,7 +9,7 @@ void RR(Process **process_list, int process_quantity, int time_quantum)
     int quantum = 0;
     Queue *ready_queue = make_queue();
 
-    Simul **simul_list = (Simul **)malloc(sizeof(Simul *) * process_quantity);
+    Simul **simul_list = (Simul **)malloc(sizeof(Simul *) * process_quantity); // Simul 구조체 생성 및 메모리 할당
     for (int i = 0; i < process_quantity; i++)
     {
         Simul *new_simul = create_simul(process_list[i]);
@@ -19,20 +19,21 @@ void RR(Process **process_list, int process_quantity, int time_quantum)
     Simul *In_CPU = NULL;
     Node *traverse_ptr;
 
+    // 실행 중인 프로세스 저장을 위한 배열 생성
     int record_size = 10;
     int *record = (int *)malloc(sizeof(int) * record_size);
     memset(record, '\0', sizeof(int) * 10);
 
-    while (process_end < process_quantity)
+    while (process_end < process_quantity) // 스케줄링 시작
     {
         sleep(1);
 
-        if (In_CPU != NULL)
+        if (In_CPU != NULL) // CPU에 프로세스가 할당이 되었을 경우
         {
             In_CPU->process->CPU_burst -= 1;
             quantum++;
 
-            if (In_CPU->process->CPU_burst == 0)
+            if (In_CPU->process->CPU_burst == 0) // 프로세스가 CPU 실행을 모두 완료한 경우
             {
                 printf("[Time: %d] Process [%d] is terminated\n", time, In_CPU->process->process_id);
                 In_CPU->end_time = time;
@@ -40,16 +41,17 @@ void RR(Process **process_list, int process_quantity, int time_quantum)
                 process_end++;
                 quantum = 0;
             }
-            else if (quantum == time_quantum)
+            else if (quantum == time_quantum) // 프로세스가 time_quantum 만큼 실행된 경우
             {
                 printf("[Time: %d] Process [%d] is halted\n", time, In_CPU->process->process_id);
                 insert(ready_queue, In_CPU);
-                In_CPU->waiting_time -= 1;
+                In_CPU->waiting_time -= 1; // ready_queue 내에 없었음에도 waiting time이 증가하는 것을 방지
                 In_CPU = NULL;
                 quantum = 0;
             }
         }
 
+        // ready_queue의 프로세스들 waiting time 증가
         traverse_ptr = ready_queue->start;
 
         while (ready_queue->start != NULL)
@@ -62,6 +64,7 @@ void RR(Process **process_list, int process_quantity, int time_quantum)
             traverse_ptr = traverse_ptr->next;
         }
 
+        // arrive time에 도달한 프로세스를 ready_queue에 삽입
         for (int i = 0; i < process_quantity; i++)
         {
             if (simul_list[i]->process->arrival_time == time)
@@ -71,22 +74,26 @@ void RR(Process **process_list, int process_quantity, int time_quantum)
             }
         }
 
-        if (In_CPU == NULL)
+        if (In_CPU == NULL) // CPU에 프로세스가 할당되지 않았을 경우
         {
             In_CPU = delete (ready_queue, ready_queue->start);
 
-            if (In_CPU != NULL)
+            if (In_CPU != NULL) // ready_queue에 프로세스가 있는 경우
+            {
+                if (In_CPU->first_cpu_time == -1)
+                    In_CPU->first_cpu_time = time;
                 printf("[Time: %d] Process [%d] is executed by CPU\n", time, In_CPU->process->process_id);
+            }
         }
 
-        if (time == record_size)
+        if (time == record_size) // 배열의 크기가 부족하면 추가 할당
         {
             record_size += 10;
             record = (int *)realloc(record, sizeof(int) * record_size);
-            memset(record + time + 1, '\0', sizeof(int) * 10);
+            memset(record + time, '\0', sizeof(int) * 10);
         }
 
-        if (In_CPU != NULL)
+        if (In_CPU != NULL) // CPU에 할당된 프로세스가 있는 경우
             record[time] = In_CPU->process->process_id + 1;
 
         time++;
@@ -103,4 +110,5 @@ void RR(Process **process_list, int process_quantity, int time_quantum)
     }
     free(simul_list);
     free(ready_queue);
+    free(record);
 }
