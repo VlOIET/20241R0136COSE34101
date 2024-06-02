@@ -48,6 +48,7 @@ Simul *create_simul();
 // Alogrithm 실행할 때 레디 큐만 넣어서 가능할까?
 // 안될 듯 알고리즘 함수 내에서 시간 돌리면서, 모든 상황을 저장해 두어야 Gantt Chart 구현가능할 것 같은데
 void FCFS(Process **process_list, int process_quantity);
+void SJF(Process **process_list, int process_quantity);
 
 // Config 함수 구현
 // Evaluation 함수 구현

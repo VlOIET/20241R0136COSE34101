@@ -55,9 +55,9 @@ Simul *delete(Queue *queue_ptr, Node *subject)
             before_node = target_node;
             target_node = target_node->next;
         }
-
-        return target_simul;
     }
+
+    return target_simul;
 }
 
 void remove_queue(Queue *queue_ptr)

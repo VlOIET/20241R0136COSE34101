@@ -27,7 +27,8 @@ int main(int argc, char *argv[])
         printf("%d %d %d %d %d\n", new_process->process_id, new_process->CPU_burst, new_process->IO_burst, new_process->arrival_time, new_process->priority);
     }
 
-    FCFS(process_list, process_quantity);
+    //FCFS(process_list, process_quantity);
+    SJF(process_list, process_quantity);
 
     for (int i = 0; i < process_quantity; i++)
     {
