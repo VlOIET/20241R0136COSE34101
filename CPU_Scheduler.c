@@ -1,7 +1,6 @@
 #include "CPU_Scheduler.h"
 
 // pid는 랜덤으로 생성시 구별 어려움 -> 0에서 증가하는 값을 받아서 사용
-// 이거 컴파일 한번하면 랜덤이 정해짐. 나중에 고칠 수 있으면 고쳐야 할듯
 Process *create_process(int pid)
 {
     Process *new_process = (Process *)malloc(sizeof(Process));
@@ -111,7 +110,7 @@ void display_Gantt(int *record, int time) // Process가 10개 이하, time이 10
     printf("|");
     printf("\n");
 
-    // 세번째 줄
+    // 3번째 줄
     before = 0;
     now = 0;
     for (int i = 0; i < time; i++)
@@ -129,7 +128,7 @@ void display_Gantt(int *record, int time) // Process가 10개 이하, time이 10
     printf("-");
     printf("\n");
 
-    // 네번째 줄
+    // 4번째 줄
     before = 0;
     now = 0;
     for (int i = 0; i < time; i++)
@@ -147,7 +146,7 @@ void display_Gantt(int *record, int time) // Process가 10개 이하, time이 10
     printf(" ");
     printf("\n");
 
-    // 다섯번째 줄
+    // 5번째 줄
     before = 0;
     now = 0;
     for (int i = 0; i < time; i++)
@@ -165,7 +164,7 @@ void display_Gantt(int *record, int time) // Process가 10개 이하, time이 10
     printf(" ");
     printf("\n");
 
-    // 여섯번째 줄
+    // 6번째 줄
     before = 0;
     now = 0;
     for (int i = 0; i < time; i++)

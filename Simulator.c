@@ -1,7 +1,4 @@
 // 구현한 함수들을 실행하는 공간
-// 처음에 몇개의 프로세스를 생성할 것인지 결정 후 배열이 프로세스들을 하나 하나 가리키도록
-// Create_Process 함수에 pid 전달
-
 #include "CPU_Scheduler.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -18,15 +15,17 @@ int main(int argc, char *argv[])
 
     process_quantity = atoi(argv[1]);
 
+    //프로세스 생성 후 메모리에 할당된 리스트에 삽입
     Process **process_list = (Process **)malloc(sizeof(Process *) * process_quantity);
 
     for (int i = 0; i < process_quantity; i++)
     {
         Process *new_process = create_process(i);
         process_list[i] = new_process;
-        printf("%d %d %d %d %d\n", new_process->process_id, new_process->CPU_burst, new_process->IO_burst, new_process->arrival_time, new_process->priority);
+        printf("Pid: %d\tCPU_burst: %d  IO_burst: %d  Arrival_time: %d  Priority: %d\n", new_process->process_id, new_process->CPU_burst, new_process->IO_burst, new_process->arrival_time, new_process->priority);
     }
 
+    // 스케줄러 유형 입력 받은 후 실행
     int type = 0;
 
     printf("-----------------------------Select Scheduler Type-----------------------------\n");
@@ -71,6 +70,7 @@ int main(int argc, char *argv[])
         break;
     }
 
+    // 할당된 메모리 해제
     for (int i = 0; i < process_quantity; i++)
     {
         free(process_list[i]);
