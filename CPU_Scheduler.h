@@ -50,6 +50,7 @@ Simul *create_simul();
 void FCFS(Process **process_list, int process_quantity);
 void SJF(Process **process_list, int process_quantity);
 void Priority(Process **process_list, int process_quantity);
+void RR(Process **process_list, int process_quantity, int time_quantum);
 
 // Config 함수 구현
 // Evaluation 함수 구현
