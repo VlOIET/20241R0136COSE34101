@@ -2,6 +2,8 @@
 
 void RR(Process **process_list, int process_quantity, int time_quantum)
 {
+    printf("-----------------------------Round Robin Scheduling----------------------------\n");
+
     int time = 0;
     int process_end = 0;
     int quantum = 0;
@@ -77,6 +79,8 @@ void RR(Process **process_list, int process_quantity, int time_quantum)
     }
 
     Evaluation(simul_list, process_quantity);
+
+    printf("---------------------------Round Robin Scheduling END--------------------------\n");
 
     for (int i = 0; i < process_quantity; i++)
     {

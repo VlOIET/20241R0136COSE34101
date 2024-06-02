@@ -27,16 +27,53 @@ int main(int argc, char *argv[])
         printf("%d %d %d %d %d\n", new_process->process_id, new_process->CPU_burst, new_process->IO_burst, new_process->arrival_time, new_process->priority);
     }
 
-    //FCFS(process_list, process_quantity);
-    //SJF(process_list, process_quantity);
-    //Priority(process_list, process_quantity);
-    //RR(process_list, process_quantity, 2);
-    //Preemptive_SJF(process_list, process_quantity);
-    //Preemptive_Priority(process_list, process_quantity);
+    int type = 0;
+
+    printf("-----------------------------Select Scheduler Type-----------------------------\n");
+    printf("\t1) FCFS\n");
+    printf("\t2) SJF\n");
+    printf("\t3) Priority\n");
+    printf("\t4) RR\n");
+    printf("\t5) Preemptive_SJF\n");
+    printf("\t6) Preemptive_Priority\n");
+    printf("-----------------------------Select Scheduler Type-----------------------------\n");
+
+    printf("Select: ");
+    scanf("%d", &type);
+
+    switch (type)
+    {
+    case 1:
+        FCFS(process_list, process_quantity);
+        break;
+
+    case 2:
+        SJF(process_list, process_quantity);
+        break;
+
+    case 3:
+        Priority(process_list, process_quantity);
+        break;
+
+    case 4:
+        int time_quantum = 0;
+        scanf("%d", &time_quantum);
+        RR(process_list, process_quantity, time_quantum);
+        break;
+
+    case 5:
+        Preemptive_SJF(process_list, process_quantity);
+        break;
+
+    case 6:
+        Preemptive_Priority(process_list, process_quantity);
+        break;
+    }
 
     for (int i = 0; i < process_quantity; i++)
     {
         free(process_list[i]);
     }
     free(process_list);
+    return 0;
 }

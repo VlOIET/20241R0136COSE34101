@@ -35,6 +35,8 @@ typedef struct Queue
 // Create_Process 함수 구현 -> 프로세스 생성
 Process *create_process(int pid);
 
+int get_scheduler_type();
+
 // Ready / Waiting Queue를 위한 Queue
 Queue *make_queue();
 void insert(Queue *queue_ptr, Simul *simul_ptr);

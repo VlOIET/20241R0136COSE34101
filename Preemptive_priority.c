@@ -2,6 +2,8 @@
 
 void Preemptive_Priority(Process **process_list, int process_quantity)
 {
+    printf("-------------------------Preemptive Priority Scheduling------------------------\n");
+
     int time = 0;
     int process_end = 0;
     int new_signal = 0;
@@ -120,6 +122,8 @@ void Preemptive_Priority(Process **process_list, int process_quantity)
         time++;
     }
     Evaluation(simul_list, process_quantity);
+
+    printf("-----------------------Preemptive Priority Scheduling END----------------------\n");
 
     for (int i = 0; i < process_quantity; i++)
     {

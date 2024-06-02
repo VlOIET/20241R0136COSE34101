@@ -2,6 +2,8 @@
 
 void Priority(Process **process_list, int process_quantity)
 {
+    printf("-------------------------------Priority Scheduling-----------------------------\n");
+
     int time = 0;
     int process_end = 0;
     Queue *ready_queue = make_queue();
@@ -81,6 +83,9 @@ void Priority(Process **process_list, int process_quantity)
         time++;
     }
     Evaluation(simul_list, process_quantity);
+
+    printf("-----------------------------Priority Scheduling END---------------------------\n");
+
 
     for (int i = 0; i < process_quantity; i++)
     {
