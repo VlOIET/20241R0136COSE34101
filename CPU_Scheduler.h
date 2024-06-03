@@ -53,6 +53,7 @@ void Priority(Process **process_list, int process_quantity);
 void RR(Process **process_list, int process_quantity, int time_quantum);
 void Preemptive_SJF(Process **process_list, int process_quantity);
 void Preemptive_Priority(Process **process_list, int process_quantity);
+void Multilevel_queue(Process **process_list, int process_quantity, int time_quantum);
 
 // Evaluation 함수 구현
 void Evaluation(Simul **simul_list, int process_quantity);

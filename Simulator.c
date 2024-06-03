@@ -6,6 +6,7 @@
 int main(int argc, char *argv[])
 {
     int process_quantity = 0;
+    int time_quantum = 0;
 
     if (argc != 2)
     {
@@ -15,7 +16,7 @@ int main(int argc, char *argv[])
 
     process_quantity = atoi(argv[1]);
 
-    //프로세스 생성 후 메모리에 할당된 리스트에 삽입
+    // 프로세스 생성 후 메모리에 할당된 리스트에 삽입
     Process **process_list = (Process **)malloc(sizeof(Process *) * process_quantity);
 
     for (int i = 0; i < process_quantity; i++)
@@ -35,6 +36,7 @@ int main(int argc, char *argv[])
     printf("\t4) RR\n");
     printf("\t5) Preemptive_SJF\n");
     printf("\t6) Preemptive_Priority\n");
+    printf("\t7) Multilevel Queue\n");
     printf("-----------------------------Select Scheduler Type-----------------------------\n");
 
     printf("Select: ");
@@ -55,7 +57,6 @@ int main(int argc, char *argv[])
         break;
 
     case 4:
-        int time_quantum = 0;
         printf("Input Time_quantum: ");
         scanf("%d", &time_quantum);
         RR(process_list, process_quantity, time_quantum);
@@ -67,6 +68,12 @@ int main(int argc, char *argv[])
 
     case 6:
         Preemptive_Priority(process_list, process_quantity);
+        break;
+
+    case 7:
+        printf("Input Time_quantum: ");
+        scanf("%d", &time_quantum);
+        Multilevel_queue(process_list, process_quantity, time_quantum);
         break;
     }
 

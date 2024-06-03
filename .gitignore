@@ -2,6 +2,5 @@ Instruction.pdf
 Extra.txt
 test.txt
 *.o
-*.out
+Scheduler
 .vscode
-Multilevel_queue.c
