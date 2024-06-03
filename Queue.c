@@ -31,7 +31,7 @@ Simul *delete(Queue *queue_ptr, Node *subject)
 
     while (target_simul == NULL && target_node != NULL)
     {
-        if (target_node == subject)
+        if (target_node == subject) // 삭제할 노드가 있는 경우
         {
             if (before_node == NULL) // 삭제할 노드가 맨 앞에 있는 경우
             {
@@ -43,14 +43,14 @@ Simul *delete(Queue *queue_ptr, Node *subject)
             {
                 before_node->next = target_node->next;
 
-                if (before_node->next == NULL)
+                if (before_node->next == NULL) // 삭제할 노드가 맨 뒤에 있는 경우
                     queue_ptr->end = before_node;
 
                 target_simul = target_node->simul;
                 free(target_node);
             }
         }
-        else
+        else // 삭제할 노드가 없는 경우
         {
             before_node = target_node;
             target_node = target_node->next;

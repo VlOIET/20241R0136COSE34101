@@ -1,5 +1,5 @@
 CC = gcc
-TARGET = Scheduler
+TARGET = scheduler
 OBJS = a.o b.o c1.o c2.o c3.o c4.o c5.o c6.o c7.o d.o
 
 $(TARGET): $(OBJS)
