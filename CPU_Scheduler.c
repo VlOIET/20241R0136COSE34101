@@ -6,9 +6,9 @@ Process *create_process(int pid)
     Process *new_process = (Process *)malloc(sizeof(Process));
 
     new_process->process_id = pid;
-    new_process->CPU_burst = rand() % 8 + 1; // 1 ~ 10 사이 랜덤
-    new_process->IO_burst = rand() % 5;      // 0 ~ 5 사이 랜덤
-    new_process->arrival_time = rand() % 4;  // 0 ~ 6 사이 랜덤
+    new_process->CPU_burst = rand() % 8 + 1; // 1 ~ 8 사이 랜덤
+    new_process->IO_burst = rand() % 5;      // 0 ~ 4 사이 랜덤
+    new_process->arrival_time = rand() % 4;  // 0 ~ 3 사이 랜덤
     new_process->priority = rand() % 5 + 1;  // 1 ~ 5 사이 랜덤
 
     return new_process;
@@ -43,7 +43,7 @@ void Evaluation(Simul **simul_list, int process_quantity)
     printf("Average response time : %.2lf\n", (double)total_response_time / process_quantity);
 }
 
-void display_Gantt(int *record, int time) // Process가 10개 이하, time이 100이하 이어야 한다.
+void display_Gantt(int *record, int time)
 {
     printf("\nGantt Chart\n");
 
